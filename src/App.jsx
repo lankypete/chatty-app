@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Messages from './Messages.jsx'
 import Chatbar from './Chatbar.jsx'
+const socketUrl = 'ws://localhost:3001'
 
 class App extends Component {
 
@@ -12,16 +13,25 @@ class App extends Component {
       loaded: false
     }
     this.onNewPost = ({content, username}) => {
-      const messages = this.state.messages.concat({content, username})
-      this.setState({
-        messages
-      })
-
+      this.state.socket.send(JSON.stringify({content, username}))
     }
   }
 
   componentDidMount() {
     setTimeout( () => {
+      const socket = new WebSocket(socketUrl)
+      this.setState({
+        socket
+      })
+      const that = this
+      socket.addEventListener('message', (msg) => {
+        const message = JSON.parse(msg.data)
+        const messages = that.state.messages.concat(message)
+        that.setState({
+          messages
+        })
+      })
+
       this.setState({
         loaded: true
       })
