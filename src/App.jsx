@@ -11,12 +11,26 @@ class App extends Component {
     super(props)
     this.state = {
       messages: props.data.messages,
-      currentUser: props.data.currentUser,
+      currentUser: props.data.currentUser.name,
       loaded: false
     }
     this.onNewPost = ({content, username}) => {
-      this.state.socket.send(JSON.stringify({content, username}))
+      const data = JSON.stringify({
+        content,
+        username,
+        type: 'message'
+      })
+      this.state.socket.send(data)
     }
+    this.updateUsrName = ({username, oldUserName}) => {
+      const data = JSON.stringify({
+        oldUserName,
+        username,
+        type: 'user-change'
+      })
+      this.state.socket.send(data)
+    }
+
   }
 
   componentDidMount() {
@@ -25,13 +39,18 @@ class App extends Component {
       this.setState({
         socket
       })
+
       const that = this
       socket.addEventListener('message', (msg) => {
-        const message = JSON.parse(msg.data)
-        message.uuid = uuid()
-        const messages = that.state.messages.concat(message)
+        const data = JSON.parse(msg.data)
+        data.uuid = uuid()
+        if (data.type === 'user-change') {
+          data.content = `${data.oldUserName} changed his/her name to ${data.username}`;
+        }
+        const messages = that.state.messages.concat(data)
         that.setState({
-          messages
+          messages,
+          currentUser: data.username
         })
       })
 
@@ -53,11 +72,8 @@ class App extends Component {
             </nav>
             <main className="messages">
               <Messages msgData={ this.state.messages }/>
-              <div className="message system">
-                Anonymous1 changed their name to nomnom.
-              </div>
             </main>
-            <Chatbar onNewPost={ this.onNewPost }/>
+            <Chatbar onNewPost={ this.onNewPost } username={ this.state.currentUser } updateUsrName={ this.updateUsrName }/>
           </section>
         )
     } else {
