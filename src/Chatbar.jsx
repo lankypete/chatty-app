@@ -5,19 +5,11 @@ class Chatbar extends Component {
 
   constructor(props) {
     super(props)
-    this.disabledChatStyle = {
-      opacity: '.6',
-      background: '#ccc'
-    }
-    this.enabledChatStyle = {
-      opacity: '1',
-      background: 'white'
-    }
     this.state = {
       content: '',
       username: '',
+      chatBarClassName: 'disabled-state',
       sendMsgDisabled: true,
-      chatStyle: this.disabledChatStyle
     }
     this.onUserName = (event) => {
       this.setState({
@@ -34,15 +26,14 @@ class Chatbar extends Component {
     if(event.target.value) {
       this.setState({
         sendMsgDisabled: false,
-        chatStyle: this.enabledChatStyle
+        chatBarClassName: ''
       })
     } else {
       this.setState({
         sendMsgDisabled: true,
-        chatStyle: this.disabledChatStyle
+        chatBarClassName: 'disabled-state'
       })
     }
-
   }
 
   onKeyPress = (event) => {
@@ -68,7 +59,7 @@ class Chatbar extends Component {
     return(
         <footer className="chatbar">
           <input onChange={ this.onUserName } value={ this.state.username } className="chatbar-username" placeholder="Your Name (Optional)" />
-          <input onChange={ this.onContentIn } onKeyPress={ this.onKeyPress } value={ this.state.content } className="chatbar-message" placeholder="Type a message and hit ENTER" style={this.state.chatStyle} />
+          <input onChange={ this.onContentIn } onKeyPress={ this.onKeyPress } value={ this.state.content } className={ `chatbar-message ${ this.state.chatBarClassName }` } placeholder="Type a message and hit ENTER"/>
         </footer>
       )
   }

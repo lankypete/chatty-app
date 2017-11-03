@@ -1,17 +1,19 @@
+$main-color: #88a1bf;
+
 h1 {
-  color: tomato;
+  color: $main-color;
 }
 
 body {
   background: white;
   color: black;
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   margin: 70px 0;
 }
 
 .chatbar {
-  background: tomato;
+  background: $main-color;
   border-top: 1px solid black;
   bottom: 0;
   display: -webkit-box;
@@ -26,11 +28,17 @@ body {
 .chatbar-message,
 .chatbar-username {
   border: 1px solid black;
+  border-radius: 2px;
   display: block;
   height: 40px;
   line-height: 40px;
   margin: 5px;
   padding: 0 9px;
+}
+
+.disabled-state {
+  opacity: .9;
+  border-color: red;
 }
 
 .chatbar-message {
@@ -78,7 +86,7 @@ body {
 }
 
 .navbar {
-  background: tomato;
+  background: $main-color;
   border-bottom: 1px solid black;
   height: 60px;
   left: 0;
@@ -89,7 +97,8 @@ body {
 }
 
 .navbar-brand {
-  color: inherit;
+  font-family: 'Rozha One', serif;
+  color: #eee;
   display: block;
   float: left;
   font-weight: 700;

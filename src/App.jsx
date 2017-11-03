@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import Messages from './Messages.jsx'
 import Chatbar from './Chatbar.jsx'
+import uuid from 'uuid'
 const socketUrl = 'ws://localhost:3001'
+
 
 class App extends Component {
 
@@ -26,6 +28,7 @@ class App extends Component {
       const that = this
       socket.addEventListener('message', (msg) => {
         const message = JSON.parse(msg.data)
+        message.uuid = uuid()
         const messages = that.state.messages.concat(message)
         that.setState({
           messages
@@ -38,12 +41,6 @@ class App extends Component {
     }, 800)
 
     console.log("componentDidMount <App />");
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
-      const messages = this.state.messages.concat(newMessage)
-      this.setState({messages: messages})
-    }, 3000);
 
   }
 
