@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 class Messages extends Component {
 
   render() {
-    console.log(this.props.msgData)
     const msgs = this.props.msgData.map( (msg) => {
       if (msg.type === 'message') {
         return (

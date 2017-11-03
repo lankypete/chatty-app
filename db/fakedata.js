@@ -1,5 +1,5 @@
 module.exports = {
-  currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+  currentUser: {name: "Whoever"}, // optional. if currentUser is not defined, it means the user is Anonymous
   messages: [
     {
       username: "Bob",

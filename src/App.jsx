@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       messages: props.data.messages,
       currentUser: props.data.currentUser.name,
+      userCount: '',
       loaded: false
     }
     this.onNewPost = ({content, username}) => {
@@ -43,6 +44,13 @@ class App extends Component {
       const that = this
       socket.addEventListener('message', (msg) => {
         const data = JSON.parse(msg.data)
+        if (data.type === 'usr-count') {
+          console.log('here')
+          this.setState({
+            userCount: data.count
+          })
+          return
+        }
         data.uuid = uuid()
         if (data.type === 'user-change') {
           data.content = `${data.oldUserName} changed his/her name to ${data.username}`;
@@ -69,6 +77,7 @@ class App extends Component {
           <section id="app-container">
             <nav className="navbar">
               <a href="/" className="navbar-brand">Chatty</a>
+              <div>Users Online {this.state.userCount}</div>
             </nav>
             <main className="messages">
               <Messages msgData={ this.state.messages }/>
