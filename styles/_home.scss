@@ -1,5 +1,14 @@
 $main-color: #88a1bf;
 
+@mixin gen-color($class, $color) {
+  #{$class} { color: $color; }
+}
+
+@include gen-color('.color1', aliceblue);
+@include gen-color('.color2', maroon);
+@include gen-color('.color3', dodgerblue);
+@include gen-color('.color4', tomato);
+
 h1 {
   color: $main-color;
 }
@@ -34,6 +43,7 @@ body {
   line-height: 40px;
   margin: 5px;
   padding: 0 9px;
+
 }
 
 .disabled-state {
@@ -86,6 +96,8 @@ body {
 }
 
 .navbar {
+  color: #eee;
+  font-family: 'Rozha One', serif;
   background: $main-color;
   border-bottom: 1px solid black;
   height: 60px;
@@ -94,11 +106,20 @@ body {
   position: fixed;
   right: 0;
   top: 0;
+
+  a {
+    color: #eee;
+  }
+
+  #user-count {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px;
+  }
 }
 
 .navbar-brand {
-  font-family: 'Rozha One', serif;
-  color: #eee;
   display: block;
   float: left;
   font-weight: 700;
@@ -108,3 +129,22 @@ body {
   padding: 0 10px;
   text-decoration: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
