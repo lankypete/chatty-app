@@ -11,6 +11,7 @@ module.exports = {
       username: "Anonymous",
       content: "No, I think you lost them. You lost your marbles Bob. You lost them for good.",
       uuid: "fde24484-2f27-435e-b919-f2e55e936dc7",
+      imgUrl: "http://www.freepngimg.com/download/lion/1-lion-png-image-image-download-picture-lions.png",
       type: "message"
     }
   ]

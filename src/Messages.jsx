@@ -2,14 +2,23 @@ import React, {Component} from 'react'
 
 class Messages extends Component {
 
+  imgTag = (imgLink) => {
+    if (!imgLink) {
+      return
+    }
+    return <div><img src={imgLink} alt="An image in the chat"/></div>
+  }
+
   render() {
     const msgs = this.props.msgData.map( (msg) => {
       if (msg.type === 'message') {
-        console.log(msg.color)
         return (
             <div key={msg.uuid} className="message">
               <span className={`message-username ${msg.color}`}>{ msg.username }</span>
-              <span className="message-content">{ msg.content }</span>
+              <span className="message-content">
+                { msg.content }
+                { this.imgTag(msg.imgUrl) }
+              </span>
             </div>
           )
       } else if (msg.type === 'user-change' ) {

@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+const imgRegEx = /(https?:\/\/.*\.(?:png|jpg|gif))/i
+
 
 // do you always extend component?
 class Chatbar extends Component {
@@ -49,9 +51,18 @@ class Chatbar extends Component {
   onKeyPress = (event) => {
     if (event.key === "Enter" && !this.state.sendMsgDisabled) {
 
+      let message = this.state.content
+
+      let imgUrl = this.state.content.match(imgRegEx)
+      if (imgUrl) {
+        imgUrl = imgUrl[0]
+        message = message.replace(imgRegEx, ' ').trim()
+      }
+
       const newMessage = {
         username: (this.props.username || 'anon'),
-        content: this.state.content
+        content: message,
+        imgUrl
       }
 
       this.props.onNewPost(newMessage)

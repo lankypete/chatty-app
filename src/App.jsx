@@ -15,12 +15,9 @@ class App extends Component {
       userCount: '',
       loaded: false
     }
-    this.onNewPost = ({content, username}) => {
-      const data = JSON.stringify({
-        content,
-        username,
-        type: 'message'
-      })
+    this.onNewPost = (data) => {
+      data.type = 'message'
+      data = JSON.stringify(data)
       this.state.socket.send(data)
     }
     this.updateUsrName = ({username, oldUserName}) => {
@@ -60,7 +57,6 @@ class App extends Component {
         }
 
         const messages = that.state.messages.concat(data)
-        console.log(data)
         that.setState({
           messages
         })
