@@ -78,8 +78,10 @@ class Chatbar extends Component {
   render() {
     return(
         <footer className="chatbar">
-          <input onKeyPress={ this.updateUsr } onChange={ this.updateUsrValue } value={ this.state.usrNameValue } className="chatbar-username" placeholder={ this.props.username } />
-          <input onChange={ this.onContentIn } onKeyPress={ this.onKeyPress } value={ this.state.content } className={ `chatbar-message ${ this.state.chatBarClassName }` } placeholder="Type a message and hit ENTER"/>
+          <div className="chatbar-wrapper">
+            <input onKeyPress={ this.updateUsr } onChange={ this.updateUsrValue } value={ this.state.usrNameValue } className="chatbar-username" placeholder={ this.props.username } />
+            <input onChange={ this.onContentIn } onKeyPress={ this.onKeyPress } value={ this.state.content } className={ `chatbar-message ${ this.state.chatBarClassName }` } placeholder="Type a message and hit ENTER"/>
+          </div>
         </footer>
       )
   }

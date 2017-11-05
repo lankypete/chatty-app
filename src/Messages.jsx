@@ -6,7 +6,7 @@ class Messages extends Component {
     if (!imgLink) {
       return
     }
-    return <div><img src={imgLink} alt="An image in the chat"/></div>
+    return <div className="message-img"><img src={imgLink} alt="An image in the chat"/></div>
   }
 
   render() {

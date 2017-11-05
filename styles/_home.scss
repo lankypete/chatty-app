@@ -1,13 +1,26 @@
-$main-color: #88a1bf;
+// $main-color: #0689f6;
+$main-color: #222;
+$footer-c: #444;
 
 @mixin gen-color($class, $color) {
-  #{$class} { color: $color; }
+  #{$class} {
+    color: $color;
+    border-right: 2px solid $color;
+  }
 }
 
-@include gen-color('.color1', aliceblue);
+@mixin max-width {
+  max-width: 1200px;
+}
+
+@include gen-color('.color1', green);
 @include gen-color('.color2', maroon);
 @include gen-color('.color3', dodgerblue);
 @include gen-color('.color4', tomato);
+
+a {
+  color: #eee;
+}
 
 h1 {
   color: $main-color;
@@ -22,21 +35,26 @@ body {
 }
 
 .chatbar {
-  background: $main-color;
+  background: $footer-c;
   border-top: 1px solid black;
   bottom: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   left: 0;
   padding: 5px;
   position: fixed;
   right: 0;
 }
 
+.chatbar-wrapper {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  @include max-width;
+}
+
 .chatbar-message,
 .chatbar-username {
-  border: 1px solid black;
+  border: none;
   border-radius: 2px;
   display: block;
   height: 40px;
@@ -47,27 +65,53 @@ body {
 }
 
 .disabled-state {
-  opacity: .9;
-  border-color: red;
+  // opacity: .9;
 }
 
 .chatbar-message {
+  font-size: 0.8rem;
   -webkit-box-flex: 8;
       -ms-flex: 8;
           flex: 8;
+  &:focus {
+    outline-color: #ccc;
+  }
 }
 
 .chatbar-username {
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  caret-color: #aaa;
+  background: $footer-c;
   -webkit-box-flex: 2;
       -ms-flex: 2;
           flex: 2;
+  &::-webkit-input-placeholder {
+    text-align: center;
+    color: white;
+  }
+  &:focus {
+    outline-color: #ccc;
+  }
 }
 
 .message {
+  margin: 0 auto;
+  @include max-width;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 5px;
+}
+
+.message-img {
+  margin: 20px auto;
+
+  img {
+    max-width: 60%;
+    border: 2px solid #ddd;
+  }
 }
 
 .message.system {
@@ -107,10 +151,6 @@ body {
   right: 0;
   top: 0;
 
-  a {
-    color: #eee;
-  }
-
   #user-count {
     position: absolute;
     top: 50%;
@@ -119,9 +159,14 @@ body {
   }
 }
 
+.nav-wrapper{
+  position: relative;
+  margin: 0 auto;
+  @include max-width;
+}
+
 .navbar-brand {
   display: block;
-  float: left;
   font-weight: 700;
   font-size: 28px;
   height: 60px;

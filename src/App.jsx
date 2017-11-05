@@ -76,8 +76,10 @@ class App extends Component {
       return(
           <section id="app-container">
             <nav className="navbar">
-              <a href="/" className="navbar-brand">Chatty</a>
-              <div id="user-count">Users Online {this.state.userCount}</div>
+              <div className="nav-wrapper">
+                <a href="/" className="navbar-brand">Chatty</a>
+                <div id="user-count">Users Online {this.state.userCount}</div>
+              </div>
             </nav>
             <main className="messages">
               <Messages msgData={ this.state.messages }/>
